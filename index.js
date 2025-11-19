@@ -1,22 +1,17 @@
 
-import express from 'express';
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3001; // Use PORT from environment variable if available
 
-// Configure CORS to allow requests from your specific frontend URL
-const corsOptions = {
-  origin: 'https://medalertgit-51659196-32faa.web.app',
-  optionsSuccessStatus: 200 
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 // This will be our in-memory data store
 const users = [];
 const families = [];
+const medications = [];
 
 // --- User Authentication ---
 
@@ -91,6 +86,23 @@ app.post('/api/family/:userId/profiles', (req, res) => {
   console.log('Added profile to family:', newProfile);
   res.status(201).send(newProfile);
 });
+
+// --- Medications ---
+app.post('/api/medications', (req, res) => {
+    const medicationData = req.body;
+    if (Object.keys(medicationData).length === 0) {
+        return res.status(400).json({ message: 'Medication data cannot be empty' });
+    }
+
+    const newMedication = {
+        id: Date.now().toString(),
+        ...medicationData
+    };
+    medications.push(newMedication);
+    console.log('Added medication:', newMedication);
+    res.status(201).json(newMedication);
+});
+
 
 app.listen(port, () => {
   console.log(`Backend server listening at http://localhost:${port}`);
