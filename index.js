@@ -1,5 +1,10 @@
 
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+const port = process.env.PORT || 3001; // Use PORT from environment variable if available
+
 // Configure CORS to allow requests from your specific frontend URL
 const corsOptions = {
   origin: 'https://medalertgit-51659196-32faa.web.app',
@@ -7,12 +12,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-
-const app = express();
-const port = process.env.PORT || 3001; // Use PORT from environment variable if available
-
-app.use(cors());
 app.use(express.json());
 
 // This will be our in-memory data store
