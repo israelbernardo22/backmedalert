@@ -2,7 +2,7 @@
 const express = require('express');
 // Configure CORS to allow requests from your specific frontend URL
 const corsOptions = {
-  origin: 'https://medalert-9b039.web.app',
+  origin: 'https://medalertgit-51659196-32faa.web.app',
   optionsSuccessStatus: 200 
 };
 
