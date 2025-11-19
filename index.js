@@ -1,6 +1,13 @@
 
 const express = require('express');
-const cors = require('cors');
+// Configure CORS to allow requests from your specific frontend URL
+const corsOptions = {
+  origin: 'https://medalert-9b039.web.app',
+  optionsSuccessStatus: 200 
+};
+
+app.use(cors(corsOptions));
+
 
 const app = express();
 const port = process.env.PORT || 3001; // Use PORT from environment variable if available
